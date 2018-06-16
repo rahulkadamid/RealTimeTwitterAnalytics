@@ -3,27 +3,17 @@
 Dynamic visualization of tweets is quite trending now a days.
 This project mainly focuses on dynamic visualization of the tweets which contain world wide topN hash tags. N can be any number eg : 1,10,20 etc.
 
-  
-</br>
-
 ## Goal
 
 Real-time dynamic visualization of tweets that contain worldwide top hashtags.
-
 
 ## Design:
 
 Started with a storm topology that calculates TopN Hashtags and then wrote new Bolt that takes TopN Hash tags with a streaming join of real-time tweets. Finally visualized only tweets that contain the TopN Hashtags.
 
-</br>   
-
 ## Technology stack
 
-![alt text](https://github.com/RepakaRamateja/RealTimeAnalyticsSystem/blob/master/Technologystack.png)
-
-
-</br>    
-
+![](Technologystack.png)
 
 <table>
 <thead>
@@ -55,37 +45,25 @@ Started with a storm topology that calculates TopN Hashtags and then wrote new B
     </tr>
 </tbody>
 </table>
-
-</br>   
+ 
 
 ## Storm Topology Used:
 
-</br>
-
-![alt text](https://github.com/RepakaRamateja/RealTimeAnalyticsSystem/blob/master/topology.png)
+![](topology.png)
 
 ParseTweetBolt: receives every tweet emitted by the TweetSpout, parses them to find hashtags and emits each of them (if any).
 
-
 Count HashtagBolt: has an HashMap for counting every hashtag (the key is the hashtag and the value is the number of times it appeared in a tweet); it receives an hashtag from the preceding bolt and updates the map consequently.
-
 
 IntermediateRankginsBolt: the one used in the course with no modifications.
 
 TotalRankingsBolt (total-ranker): the one used in the course with no modifications.
 
-
 TweetsWithTopHashtagsBolt (top-tweets): this bolt receives data both from the TweetSpout and the TotalRankingsBolt; if the data come from the TotalRankingBolt, it updates an internal Rankings object with the one received, so that it has always the updated hashtags rankings. If the data come from the TweetSpout, it checks if the tweet contains one or more hashtags and if at least one of them is contained in the rankings object: if true emits the tweet to the ReportBolt, otherwise it will be discarded. The tweet is emitted to the next bolt along with the size of the font to display it: the higher rank the hashtag has, the bigger the font will be (this value is normalized against the max rank to avoid too big fonts).
-
 
 ReportBolt: this Bolt publishes the data to the Redis instance.
 
-
-</br>
-
 ## Instructions for Project Execution :
-
-</br>
 
 Install Vagrant (See the below link)
 
@@ -98,7 +76,6 @@ https://www.virtualbox.org/manual/ch01.html
 Create a twitter app (See the below link)
 
 http://docs.inboundnow.com/guide/create-twitter-application/
-
 
 Open the TopNTweetTopology file which is located in the below path 
 
@@ -155,19 +132,10 @@ Execute below commands:
 
     Now navigate to the browser and enter url as http://localhost:5000
 
-</br>
-
 ## Visualization output:
 
- ![alt text](https://github.com/RepakaRamateja/RealTimeAnalyticsSystem/blob/master/Output.png)
-
-</br>
+ ![](Output.png)
 
 ## Future Scope:
 
    Display more number of tweets in the visualization rather than single dynamic tweet which contains TopN hash tags
-
-
-
-
-
